@@ -1,6 +1,6 @@
 ---
 title: "CTA-ED Exercise 4: Scaling techniques"
-author: "[Your full name here]"
+author: "[Jingmin Chen]"
 date: "6/03/2024"
 output: html_document
 ---
@@ -172,4 +172,28 @@ dim(kaneko_dfm_study1)
 ## Exercises
 
 1. Estimate a wordfish model for the @kaneko_estimating_2021 data
+```{r}
+#### estimate the Wordfish model ####
+set.seed(123L)
+kaneko_dfm_study1_results <- textmodel_wordfish(kaneko_dfm_study1, 
+                                             sparse = TRUE)
+summary(kaneko_dfm_study1_results)
+
+textplot_scale1d(kaneko_dfm_study1_results)
+
+textplot_scale1d(kaneko_dfm_study1_results, margin = "features")
+
+features <- kaneko_dfm_study1_results[["features"]]
+
+betas <- kaneko_dfm_study1_results[["beta"]]
+
+feat_betas <- as.data.frame(cbind(features, betas))
+feat_betas$betas <- as.numeric(feat_betas$betas)
+
+feat_betas %>%
+  arrange(desc(betas)) %>%
+  top_n(20) %>% 
+  kbl() %>%
+  kable_styling(bootstrap_options = "striped")
+```
 2. Visualize the results
