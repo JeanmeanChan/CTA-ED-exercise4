@@ -173,12 +173,14 @@ dim(kaneko_dfm_study1)
 
 1. Estimate a wordfish model for the @kaneko_estimating_2021 data
 ```{r}
-#### estimate the Wordfish model ####
+#### estimate the Wordfish model
 set.seed(123L)
 kaneko_dfm_study1_results <- textmodel_wordfish(kaneko_dfm_study1, 
                                              sparse = TRUE)
+# result
 summary(kaneko_dfm_study1_results)
 
+#output plot
 textplot_scale1d(kaneko_dfm_study1_results)
 
 textplot_scale1d(kaneko_dfm_study1_results, margin = "features")
